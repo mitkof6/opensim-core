@@ -25,12 +25,11 @@ nuget:
 
 install:
   # Use Chocolatey to install SWIG 3.0.0.
-  #- cinst swig
-  # TODO not testing wrapping yet.
-  #- cinst wget
-  #- wget http://prdownloads.sourceforge.net/swig/swigwin-3.0.2.zip
-  #- jar xf swigwin-3.0.2.zip
-  #- mv swigwin-3.0.2 C:\
+  # TODO need a more recent SWIG version. - cinst swig
+  - cinst wget
+  - wget http://prdownloads.sourceforge.net/swig/swigwin-3.0.2.zip
+  - jar xf swigwin-3.0.2.zip
+  - mv swigwin-3.0.2 C:\
   
   ## Simbody.
   # Simbody's installation is pushed to our Appveyor NuGet account feed.
@@ -47,7 +46,7 @@ build_script:
   - mkdir build
   - cd build
   # Configure.
-  - cmake .. -DSIMBODY_HOME=C:\simbody # TODO -DBUILD_JAVA_WRAPPING=ON -DBUILD_PYTHON_WRAPPING=ON -DSWIG_EXECUTABLE=C:\swigwin-3.0.2\swig.exe # TODO -DBUILD_SIMM_TRANSLATOR=ON
+  - cmake .. -DSIMBODY_HOME=C:\simbody -DBUILD_JAVA_WRAPPING=ON -DBUILD_PYTHON_WRAPPING=ON -DSWIG_EXECUTABLE=C:\swigwin-3.0.2\swig.exe # TODO -DBUILD_SIMM_TRANSLATOR=ON
   # Build.
   - MSBuild OpenSim.sln /target:ALL_BUILD /p:Configuration=Release /maxcpucount /verbosity:quiet
 
