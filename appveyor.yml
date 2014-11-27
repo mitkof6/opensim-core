@@ -24,10 +24,13 @@ nuget:
   account_feed: true
 
 install:
-  # Use Chocolatey to install SWIG 3.0.0.
-  # TODO need a more recent SWIG version. - cinst swig
+  # Use Chocolatey to install SWIG.
+  # TODO Chocolatey's SWIG is 3.0.0, which has a bug.
+  # We need SWIG 3.0.2. We'll revisit Chocolatey later on.
+  # - cinst swig
   - cinst wget
   - wget http://prdownloads.sourceforge.net/swig/swigwin-3.0.2.zip
+  # Unzip using java.
   - jar xf swigwin-3.0.2.zip
   - mv swigwin-3.0.2 C:\
   
