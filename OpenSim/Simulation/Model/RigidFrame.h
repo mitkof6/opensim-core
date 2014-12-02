@@ -104,6 +104,15 @@ public:
      * @return Transform  The transform between this frame and its root RigidFrame.
     */
     SimTK::Transform getTransformInMobilizedBody() const { return _mbTransform; }
+
+    /**
+    * ModelComponent display interface.
+    *
+    * This method appends the visuals for the RigidFrame to the list appendToThis passed in.
+    */
+    void generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
+        SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const;
+
 private:
     void setNull();
     
