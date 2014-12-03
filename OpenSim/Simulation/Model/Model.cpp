@@ -219,7 +219,6 @@ void Model::setNull()
 {
 	
     _useVisualizer = false;
-    _displayHints.clear();
     _allControllersEnabled = true;
     _groundBody = NULL;
 
