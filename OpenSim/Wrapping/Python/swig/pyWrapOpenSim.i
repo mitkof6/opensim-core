@@ -495,6 +495,7 @@ namespace SimTK {
 
 namespace SimTK {
 %template(ArrayDecorativeGeometry) SimTK::Array_<SimTK::DecorativeGeometry>;
+%template(SimTKArrayString) SimTK::Array_<std::string>;
 }
 
 // State & Stage
@@ -510,10 +511,12 @@ namespace SimTK {
 %include <OpenSim/Common/Property.h>
 %include <OpenSim/Common/PropertyGroup.h>
 %template(ArrayPtrsPropertyGroup) OpenSim::ArrayPtrs<OpenSim::PropertyGroup>;
+%template (PropertyString) OpenSim::Property<std::string>;
 %include <OpenSim/Common/Object.h>
 %include <OpenSim/Common/ObjectGroup.h>
 %include <OpenSim/Common/Set.h>
 %include <OpenSim/Common/StateVector.h>
+%template(ArrayStateVector) OpenSim::Array<OpenSim::StateVector>;
 %include <OpenSim/Common/StorageInterface.h>
 %include <OpenSim/Common/Storage.h>
 %include <OpenSim/Common/Units.h>
@@ -588,6 +591,8 @@ namespace SimTK {
 %include <OpenSim/Simulation/Model/Frame.h>
 %include <OpenSim/Simulation/Model/RigidFrame.h>
 %include <OpenSim/Simulation/Model/FixedFrame.h>
+%template(SetFrames) OpenSim::Set<OpenSim::Frame>;
+%template(ModelComponentSetFrames) OpenSim::ModelComponentSet<OpenSim::Frame>;
 
 %include <OpenSim/Simulation/Model/Force.h>
 %template(SetForces) OpenSim::Set<OpenSim::Force>;
@@ -711,6 +716,8 @@ namespace SimTK {
 %include <OpenSim/Simulation/Model/Bhargava2004MuscleMetabolicsProbe.h>
 %include <OpenSim/Simulation/Model/Umberger2010MuscleMetabolicsProbe.h>
 %include <OpenSim/Simulation/Model/ModelDisplayHints.h>
+%include <OpenSim/Simulation/Model/AppearanceMap.h>
+%include <OpenSim/Simulation/Model/ModelDisplay.h>
 %include <OpenSim/Simulation/Model/ModelVisualizer.h>
 %include <OpenSim/Simulation/Model/Model.h>
 
