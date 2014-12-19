@@ -111,7 +111,7 @@ public:
     * This method appends the visuals for the RigidFrame to the list appendToThis passed in.
     */
     void generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
-        SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const;
+        SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const override;
 
 private:
     void setNull();
