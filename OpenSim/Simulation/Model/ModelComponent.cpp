@@ -24,6 +24,7 @@
 // INCLUDES
 #include "OpenSim/Simulation/Model/ModelComponent.h"
 #include "OpenSim/Simulation/Model/Model.h"
+#include "OpenSim/Simulation/Model/DisplayerInterface.h"
 
 using namespace SimTK;
 
@@ -35,18 +36,21 @@ namespace OpenSim {
 ModelComponent::ModelComponent() : _model(NULL) 
 {
     constructProperty_GeometrySet();
+    _displayDelegate = new DefaultDisplayer();
 }
 
 ModelComponent::ModelComponent(const std::string& fileName, bool updFromXMLNode)
 :   Component(fileName, updFromXMLNode), _model(NULL)
 {
     constructProperty_GeometrySet();
+    _displayDelegate = new DefaultDisplayer();
 }
 
 ModelComponent::ModelComponent(SimTK::Xml::Element& element) 
 :   Component(element), _model(NULL)
 {
     constructProperty_GeometrySet();
+    _displayDelegate = new DefaultDisplayer();
 }
 
 const Model& ModelComponent::getModel() const
@@ -83,9 +87,6 @@ void ModelComponent::extendFinalizeFromProperties()
     int geomSize = getProperty_GeometrySet().size();
     if (geomSize > 0){
         for (int i = 0; i < geomSize; ++i){
-            if (findComponent(get_GeometrySet(i).getName()) == nullptr){
-                addComponent(&upd_GeometrySet(i));
-            }
             upd_GeometrySet(i).setOwnerModelComponent(*this);
         }
     }
@@ -104,11 +105,9 @@ void ModelComponent::generateDecorations
     const SimTK::State&                         state,
     SimTK::Array_<SimTK::DecorativeGeometry>&   appendToThis) const 
 {
-    for(unsigned int i=0; i < _components.size(); i++){
-		ModelComponent *mc = dynamic_cast<ModelComponent*>(_components[i]);
-        if (mc)
-            mc->generateDecorations(fixed,hints,state,appendToThis);
-	}
+    // std::cout << "Processing " << getConcreteClassName() << " " << getName() << std::endl;
+    // Delegate call to generateDecorations
+     getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
 }
 
 void ModelComponent::adoptGeometry(OpenSim::Geometry* geom) {
@@ -138,7 +137,7 @@ void ModelComponent::adoptGeometry(OpenSim::Geometry* geom) {
         
     }
     append_GeometrySet(*geom);
-    addComponent(geom); // Geometry is a subcomponent.
+    //addComponent(geom); 
     geom->setOwnerModelComponent(*this);
     return;
 }
