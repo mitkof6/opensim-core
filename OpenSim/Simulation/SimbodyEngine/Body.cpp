@@ -48,7 +48,7 @@ using SimTK::DecorativeGeometry;
 /**
  * Default constructor.
  */
-Body::Body() : RigidFrame()
+Body::Body() : PhysicalFrame()
 {
     //_body = this;
 	constructProperties();
@@ -59,7 +59,7 @@ Body::Body() : RigidFrame()
  * Constructor.
  */
 Body::Body(const std::string &aName,double aMass,const SimTK::Vec3& aMassCenter,const SimTK::Inertia& aInertia) :
-   RigidFrame()
+    PhysicalFrame()
 {
 	constructProperties();
 	setName(aName);
@@ -97,9 +97,6 @@ void Body::extendFinalizeFromProperties()
 		const SimTK::MassProperties& massProps = getMassProperties();
 		_internalRigidBody = SimTK::Body::Rigid(massProps);
 	}
-	
-	_index.invalidate();
-    _mbTransform.setToZero();
 }
 
 //_____________________________________________________________________________
@@ -136,9 +133,9 @@ void Body::extendConnectToModel(Model& aModel)
 
 void Body::extendAddToSystem(SimTK::MultibodySystem& system) const
 {
+    Super::extendAddToSystem(system);
 	if(getName() == "ground"){
-		Body * mutableThis = const_cast<Body *>(this);
-		mutableThis->_index = SimTK::GroundIndex;
+        setMobilizedBodyIndex(SimTK::GroundIndex);
 	}
 }
 
@@ -193,7 +190,7 @@ const SimTK::Inertia& Body::getInertia() const
 				cout << ex.what() << endl;
 
 				// get some aggregate value for the inertia based on exsiting values
-				double diag = Ivec.getSubVec<3>(0).norm()/sqrt(3);
+                double diag = Ivec.getSubVec<3>(0).norm()/sqrt(3.0);
 
 				// and then assume a spherical shape.
 				_inertia = SimTK::Inertia(Vec3(diag), Vec3(0));
@@ -391,7 +388,8 @@ void Body::scaleInertialProperties(const SimTK::Vec3& aScaleFactors, bool aScale
  */
 void Body::scaleMass(double aScaleFactor)
 {
-	if (_index==0)	// The following throws an exception if applied to ground.
+    // Do not attempt to scale the inertia of ground
+    if (getMobilizedBodyIndex() == SimTK::GroundIndex)
 		return;
 
 	upd_mass() *= aScaleFactor;

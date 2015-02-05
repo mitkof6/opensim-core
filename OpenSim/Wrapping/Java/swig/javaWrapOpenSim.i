@@ -49,7 +49,7 @@
 #include <OpenSim/Simulation/MomentArmSolver.h>
 
 #include <OpenSim/Simulation/Model/Frame.h>
-#include <OpenSim/Simulation/Model/FixedFrame.h>
+#include <OpenSim/Simulation/Model/PhysicalFrame.h>
 
 #include <OpenSim/Simulation/Model/Force.h>
 #include <OpenSim/Simulation/Model/PrescribedForce.h>
@@ -888,8 +888,7 @@ namespace SimTK {
 %include <OpenSim/Simulation/MomentArmSolver.h>
 
 %include <OpenSim/Simulation/Model/Frame.h>
-%include <OpenSim/Simulation/Model/RigidFrame.h>
-%include <OpenSim/Simulation/Model/FixedFrame.h>
+%include <OpenSim/Simulation/Model/PhysicalFrame.h>
 %template(SetFrames) OpenSim::Set<OpenSim::Frame>;
 %template(ModelComponentSetFrames) OpenSim::ModelComponentSet<OpenSim::Frame>;
 

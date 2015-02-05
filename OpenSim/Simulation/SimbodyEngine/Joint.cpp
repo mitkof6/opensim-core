@@ -317,15 +317,15 @@ void Joint::scale(const ScaleSet& scaleSet)
     bool found_b = false; 
     for (int i=0; i<scaleSet.getSize(); i++) {
         Scale& scale = scaleSet.get(i);
-        if (!found_p & scale.getSegmentName() == parentName) {
+        if (!found_p && (scale.getSegmentName() == parentName)) {
             scale.getScaleFactors(parentFactors);
             found_p = true;
         }
-        if (!found_b & scale.getSegmentName() == bodyName) {
+        if (!found_b && (scale.getSegmentName() == bodyName)) {
             scale.getScaleFactors(bodyFactors);
             found_b = true;
         }
-        if(found_p & found_b)
+        if(found_p && found_b)
             break;
     }
 
@@ -396,12 +396,12 @@ void Joint::constructCoordinates()
 const SimTK::MobilizedBodyIndex Joint::
     getMobilizedBodyIndex(const OpenSim::Body& body) const
 {
-        return body._index;
+        return body.getMobilizedBodyIndex();
 } 
 
 void Joint::setChildMobilizedBodyIndex(const SimTK::MobilizedBodyIndex index) const
 { 
-    getChildBody()._index = index;
+    getChildBody().setMobilizedBodyIndex(index);
 }
 
 
@@ -656,7 +656,7 @@ int Joint::assignSystemIndicesToBodyAndCoordinates(
                       getName().c_str(), mobilized->getName().c_str());
 
         // ONLY the base Joint can do this assignment
-        mobilized->_index = mobod.getMobilizedBodyIndex();
+        mobilized->setMobilizedBodyIndex(mobod.getMobilizedBodyIndex());
     }
     int nc = numCoordinates();
     SimTK_ASSERT3(numMobilities <= (nc - startingCoordinateIndex),
