@@ -110,6 +110,9 @@ public:
     // End of underlying MobilizedBody accessors.
     ///@} 
 
+    void generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
+        SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const;
+
 protected:
     /** @name Advanced: PhysicalFrame Devloper Interface
     These methods are intended for PhysicalFrame builders. */

@@ -43,8 +43,8 @@
 #include <OpenSim/Common/osimCommon.h>
 
 #include <OpenSim/Common/FunctionAdapter.h>
+#include <OpenSim/Simulation/Model/PhysicalOffsetFrame.h>
 #include <OpenSim/Simulation/Model/Model.h>
-#include <OpenSim/Simulation/Model/FixedFrame.h>
 #include <OpenSim/Simulation/Model/ModelVisualizer.h>
 #include <OpenSim/Simulation/Model/AnalysisSet.h>
 #include <OpenSim/Simulation/Model/BodySet.h>
@@ -63,6 +63,7 @@
 #include <OpenSim/Simulation/SimbodyEngine/CoordinateCouplerConstraint.h>
 #include <OpenSim/Simulation/SimbodyEngine/RollingOnSurfaceConstraint.h>
 #include <OpenSim/Auxiliary/auxiliaryTestFunctions.h>
+#include "SimTKsimbody.h"
 
 using namespace OpenSim;
 using namespace std;
@@ -997,7 +998,7 @@ void testRollingOnSurfaceConstraint()
 
     //OpenSim rod
     auto osim_rod = new OpenSim::Body("rod", mass, comInRod, inertiaAboutCom);
-    OpenSim::FixedFrame* cylFrame = new FixedFrame(*osim_rod, Transform(comInRod));
+    OpenSim::PhysicalOffsetFrame* cylFrame = new PhysicalOffsetFrame(*osim_rod, Transform(comInRod));
     cylFrame->setName("comInRod");
     osimModel->addFrame(cylFrame);
     Mesh* cylGeom = new Mesh("cylinder.vtp");

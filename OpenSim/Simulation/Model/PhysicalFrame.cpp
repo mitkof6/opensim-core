@@ -69,10 +69,10 @@ SimTK::Transform PhysicalFrame::
 
 SimTK::Transform PhysicalFrame::extendFindTransformInBaseFrame() const
 {
-    return Transform();
+    return SimTK::Transform();
 }
 
-void RigidFrame::generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
+void PhysicalFrame::generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
     SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const
 {
     //Super::generateDecorations(fixed, hints, state, appendToThis);
