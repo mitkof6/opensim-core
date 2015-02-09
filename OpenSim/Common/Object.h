@@ -65,6 +65,7 @@ template class OSIMCOMMON_API OpenSim::ArrayPtrs<OpenSim::Object>;
         #undef override
     #endif
     #define override
+    #define final 
     #ifdef FINAL_11
         #undef FINAL_11
     #endif
