@@ -24,7 +24,6 @@
 // INCLUDES
 #include "OpenSim/Simulation/Model/ModelComponent.h"
 #include "OpenSim/Simulation/Model/Model.h"
-#include "OpenSim/Simulation/Model/DisplayerInterface.h"
 
 using namespace SimTK;
 
@@ -36,21 +35,18 @@ namespace OpenSim {
 ModelComponent::ModelComponent() : _model(NULL) 
 {
     constructProperty_GeometrySet();
-    _displayDelegate = new DefaultDisplayer();
 }
 
 ModelComponent::ModelComponent(const std::string& fileName, bool updFromXMLNode)
 :   Component(fileName, updFromXMLNode), _model(NULL)
 {
     constructProperty_GeometrySet();
-    _displayDelegate = new DefaultDisplayer();
 }
 
 ModelComponent::ModelComponent(SimTK::Xml::Element& element) 
 :   Component(element), _model(NULL)
 {
     constructProperty_GeometrySet();
-    _displayDelegate = new DefaultDisplayer();
 }
 
 const Model& ModelComponent::getModel() const
@@ -87,7 +83,7 @@ void ModelComponent::extendFinalizeFromProperties()
     int geomSize = getProperty_GeometrySet().size();
     if (geomSize > 0){
         for (int i = 0; i < geomSize; ++i){
-            upd_GeometrySet(i).setOwnerModelComponent(*this);
+            addComponent(&upd_GeometrySet(i));
         }
     }
 }
@@ -96,18 +92,6 @@ void ModelComponent::connectToModel(Model& model)
 {
     _model = &model;
     extendConnectToModel(model);
-}
-
-// Base class implementation of virtual method.
-void ModelComponent::generateDecorations
-    (bool                                        fixed, 
-    const ModelDisplayHints&                    hints,
-    const SimTK::State&                         state,
-    SimTK::Array_<SimTK::DecorativeGeometry>&   appendToThis) const 
-{
-    // std::cout << "Processing " << getConcreteClassName() << " " << getName() << std::endl;
-    // Delegate call to generateDecorations
-     getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
 }
 
 void ModelComponent::adoptGeometry(OpenSim::Geometry* geom) {
@@ -137,8 +121,7 @@ void ModelComponent::adoptGeometry(OpenSim::Geometry* geom) {
         
     }
     append_GeometrySet(*geom);
-    //addComponent(geom); 
-    geom->setOwnerModelComponent(*this);
+    addComponent(geom); 
     return;
 }
 

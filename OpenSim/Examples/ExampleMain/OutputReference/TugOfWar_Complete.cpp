@@ -108,19 +108,19 @@ int main()
         leftAnchorGeometry->set_scale_factors(Vec3(5, 1, 1));
         rightAnchorGeometry->set_scale_factors(Vec3(5, 1, 1));
         // reposition the anchors
-        leftAnchorGeometry->set_frame_name(leftAnchorFrame->getName());
+        leftAnchorGeometry->setFrameName(leftAnchorFrame->getName());
         ground.adoptGeometry(leftAnchorGeometry);
-        rightAnchorGeometry->set_frame_name(rightAnchorFrame->getName());
+        rightAnchorGeometry->setFrameName(rightAnchorFrame->getName());
         ground.adoptGeometry(rightAnchorGeometry);
         
         Geometry* cylGeometry = new Cylinder(0.2, .3);
-        cylGeometry->set_frame_name("CylAnchor");
+        cylGeometry->setFrameName("CylAnchor");
         cylGeometry->setRepresentation(Geometry::DrawWireframe);
         ground.adoptGeometry(cylGeometry);
 
         Geometry* ellipsoidGeometry = new Ellipsoid(0.2, .7, .5);
         ellipsoidGeometry->setColor(SimTK::Vec3(1.0, .5, 0.1));
-        ellipsoidGeometry->set_frame_name("EllipsoidAnchor");
+        ellipsoidGeometry->setFrameName("EllipsoidAnchor");
         ground.adoptGeometry(ellipsoidGeometry);
         
         // BLOCK BODY
@@ -134,7 +134,7 @@ int main()
         block->addMeshGeometry("block.vtp");
         
         Geometry* sphereGeometry = new Sphere(0.1);
-        //sphereGeometry->set_frame_name(block->getName());
+        sphereGeometry->setFrameName(block->getName());
         block->adoptGeometry(sphereGeometry);
         
         // FREE JOINT

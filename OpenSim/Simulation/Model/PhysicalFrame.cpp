@@ -77,5 +77,5 @@ void PhysicalFrame::generateDecorations(bool fixed, const ModelDisplayHints& hin
 {
     //Super::generateDecorations(fixed, hints, state, appendToThis);
     if (!fixed || !hints.get_show_frames()) return;
-    getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
+    //getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
 }

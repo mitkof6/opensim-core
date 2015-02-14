@@ -73,7 +73,7 @@ int main()
         Frame* cyl1Frame = new PhysicalOffsetFrame(*linkage1, Transform(Vec3(0.0, linkageLength / 2.0, 0.0)));
         cyl1Frame->setName("Cyl1_frame");
         osimModel.addFrame(cyl1Frame);
-        cyl->set_frame_name("Cyl1_frame");
+        cyl->setFrameName("Cyl1_frame");
         linkage1->adoptGeometry(cyl);
 
         linkage1->adoptGeometry(new Sphere(0.1));
@@ -85,7 +85,7 @@ int main()
         Frame* cyl2Frame = new PhysicalOffsetFrame(*linkage2, Transform(Vec3(0.0, linkageLength / 2.0, 0.0)));
         cyl2Frame->setName("Cyl2_frame");
         osimModel.addFrame(cyl2Frame);
-        (linkage2->upd_GeometrySet(0)).set_frame_name("Cyl2_frame");
+        (linkage2->upd_GeometrySet(0)).setFrameName("Cyl2_frame");
         // Creat a block to be the pelvis
         double blockMass = 20.0, blockSideLength = 0.2;
         Vec3 blockMassCenter(0);
