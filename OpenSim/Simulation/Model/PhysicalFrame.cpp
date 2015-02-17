@@ -79,3 +79,11 @@ void PhysicalFrame::generateDecorations(bool fixed, const ModelDisplayHints& hin
     if (!fixed || !hints.get_show_frames()) return;
     //getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
 }
+/*
+void PhysicalFrame::extendFinalizeFromProperties()
+{
+    //FrameGeometry* frame = new FrameGeometry(0.5);
+    //frame->setFrameName(getName());
+    //addComponent(frame);
+}
+*/
