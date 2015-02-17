@@ -109,11 +109,7 @@ public:
     */
     void addMeshGeometry(const std::string &aGeometryFileName, const SimTK::Vec3 scale = SimTK::Vec3(1));
     /// override default adoptGeometry to set Frame to this Body
-    void adoptGeometry(OpenSim::Geometry* geom) override
-    {
-        geom->setFrameName(getName());
-        Super::adoptGeometry(geom);
-    }
+    void adoptGeometry(OpenSim::Geometry* geom) override;
     /** Get the named wrap object, if it exists.
     *
     * @param aName Name of the wrap object.

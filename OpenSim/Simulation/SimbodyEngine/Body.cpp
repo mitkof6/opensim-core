@@ -157,6 +157,13 @@ void Body::addMeshGeometry(const std::string& aGeometryFileName, const SimTK::Ve
     adoptGeometry(geom);
 }
 
+void Body::adoptGeometry(OpenSim::Geometry* geom) 
+{
+    if (geom->getFrameName() == "")
+        geom->setFrameName(getName());
+    Super::adoptGeometry(geom);
+}
+
 //_____________________________________________________________________________
 /**
  * Get the inertia matrix of the body.
