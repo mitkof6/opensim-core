@@ -140,6 +140,8 @@ protected:
     SimTK::Transform
         calcGroundTransform(const SimTK::State& state) const override;
 
+    void extendConnectToModel(Model& model) override;
+
 private:
     /* ID for the underlying mobilized body in Simbody system.
     Only Joint can set, since it defines the mobilized body type and

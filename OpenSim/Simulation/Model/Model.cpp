@@ -996,6 +996,8 @@ void Model::createGroundBodyIfNecessary()
     ground->setName(SimbodyGroundName);
     ground->set_mass(0.0);
     ground->set_mass_center(Vec3(0.0));
+    ground->upd_GeometrySet(0).setFrameName("ground");
+
     _groundBody = ground;
 }
 
