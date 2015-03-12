@@ -43,6 +43,12 @@ using namespace OpenSim;
 PhysicalFrame::PhysicalFrame() : Frame()
 {
     setAuthors("Matt DeMers, Ayman Habib, Ajay Seth");
+    FrameGeometry* frm = new FrameGeometry(0.2);
+    frm->setName("frame_geometry");
+    frm->set_display_radius(.004);
+    frm->setRepresentation(Geometry::Hide);
+    append_GeometrySet(*frm);
+
 }
 
 const SimTK::MobilizedBody& PhysicalFrame::getMobilizedBody() const
@@ -68,6 +74,7 @@ SimTK::Transform PhysicalFrame::
 
 void PhysicalFrame::extendConnectToModel(Model& model)
 {
+    // Better use name search or more robust method
     if (upd_GeometrySet(0).getFrameName() == "")
         upd_GeometrySet(0).setFrameName(getName());
     Super::extendConnectToModel(model);
@@ -78,19 +85,3 @@ SimTK::Transform PhysicalFrame::extendFindTransformInBaseFrame() const
 {
     return SimTK::Transform();
 }
-
-void PhysicalFrame::generateDecorations(bool fixed, const ModelDisplayHints& hints, const SimTK::State& state,
-    SimTK::Array_<SimTK::DecorativeGeometry>& appendToThis) const
-{
-    //Super::generateDecorations(fixed, hints, state, appendToThis);
-    if (!fixed || !hints.get_show_frames()) return;
-    //getDisplayDelegate().generateDecorations(*this, fixed, hints, state, appendToThis);
-}
-/*
-void PhysicalFrame::extendFinalizeFromProperties()
-{
-    //FrameGeometry* frame = new FrameGeometry(0.5);
-    //frame->setFrameName(getName());
-    //addComponent(frame);
-}
-*/
