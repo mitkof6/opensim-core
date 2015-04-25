@@ -248,16 +248,6 @@ void Ligament::computeForce(const SimTK::State& s,
 
 	path.addInEquivalentForces(s, force, bodyForces, generalizedForces);
 
-	//OpenSim::Array<PointForceDirection*> PFDs;
-	//path.getPointForceDirections(s, &PFDs);
-
-	//for (int i = 0; i < PFDs.getSize(); i++) {
-	//	applyForceToPoint(s, PFDs[i]->body(), PFDs[i]->point(),
-	//		force*PFDs[i]->direction(), bodyForces);
-	//	
-	//}
-	//for (int i = 0; i < PFDs.getSize(); i++)
-	//	delete PFDs[i];
 }
 
 double Ligament::computePotentialEnergy(const SimTK::State& s) const
@@ -275,11 +265,11 @@ double Ligament::computePotentialEnergy(const SimTK::State& s) const
 	}
 	else if (e <= 2 * e_l)
 	{
-		return (1 / 12) * k * pow(e, 3) / e_l;
+		return -(1 / 12) * k * pow(e, 3) / e_l;
 	}
 	else
 	{
-		return 0.5 * k * pow(e, 2) - e_l * e;
+		return -0.5 * k * pow(e, 2) - e_l * e;
 	}
 }
 
