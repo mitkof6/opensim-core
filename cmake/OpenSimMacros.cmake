@@ -55,12 +55,7 @@ function(OpenSimAddLibrary)
         -DOPENSIM_${OSIMADDLIB_UKIT}_AUTHORS="${AUTHORS}"
         -DOPENSIM_${OSIMADDLIB_UKIT}_TYPE="Shared"
         )
-
-    # Unity Build
-    if(USE_UNITY_BUILD)
-        enable_unity_build(${OSIMADDLIB_LIBRARY_NAME} OSIMADDLIB_SOURCES)
-    endif()
-
+    
     # Add the library.
     # ----------------
     # These next few lines are the most important:
@@ -73,12 +68,12 @@ function(OpenSimAddLibrary)
 
     # This target links to the libraries provided as arguments to this func.
     target_link_libraries(${OSIMADDLIB_LIBRARY_NAME} ${OSIMADDLIB_LINKLIBS})
-
+    
     # This is for exporting classes on Windows.
     if(OSIMADDLIB_VENDORLIB)
-	    set(OSIMADDLIB_FOLDER "Vendor Libraries")
+        set(OSIMADDLIB_FOLDER "Vendor Libraries")
     else()
-		set(OSIMADDLIB_FOLDER "Libraries")
+        set(OSIMADDLIB_FOLDER "Libraries")
     endif()
     set_target_properties(${OSIMADDLIB_LIBRARY_NAME} PROPERTIES
        DEFINE_SYMBOL OSIM${OSIMADDLIB_UKIT}_EXPORTS
@@ -136,6 +131,11 @@ function(OpenSimAddLibrary)
         foreach(OSIMADDLIB_TESTDIR ${OSIMADDLIB_TESTDIRS})
             subdirs("${OSIMADDLIB_TESTDIR}")
         endforeach()
+    endif()
+    
+    # Cotire fast build
+    if(USE_COTIRE)
+        cotire(${OSIMADDLIB_LIBRARY_NAME})
     endif()
 
 endfunction()

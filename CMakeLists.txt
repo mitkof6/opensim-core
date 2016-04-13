@@ -45,6 +45,7 @@ set(OPENSIM_VERSION
 # ------------------
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 include(OpenSimMacros)
+include(cotire)
 
 # Directory in which to install.
 # ------------------------------
@@ -99,7 +100,7 @@ for both OpenSim and Simbody." ON)
 option(BUILD_API_ONLY "Build/install only headers, libraries,
 wrapping, tests; not applications (ik, rra, etc.)." OFF)
 
-option(USE_UNITY_BUILD "Use unity build for fast building" ON)
+option(USE_COTIRE "Use cotire for fast building" ON)
 
 # Configure installation directories across platforms.
 # ----------------------------------------------------

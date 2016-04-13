@@ -68,7 +68,7 @@ static osimToolsInstantiator instantiator;
  * The purpose of this routine is to register all class types exported by
  * the osimTools library.
  */
-OSIMTOOLS_API void RegisterTypes_osimTools()
+void RegisterTypes_osimTools()
 {
   try {
 
