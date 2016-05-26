@@ -1,4 +1,4 @@
-add_subdirectory(TaskSpace EXCLUDE_FROM_ALL)
+add_subdirectory(TaskSpace)
 
 file(GLOB TO_COMPILE "future*.cpp")
 
