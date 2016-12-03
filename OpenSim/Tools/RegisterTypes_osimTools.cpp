@@ -92,8 +92,8 @@ OSIMTOOLS_API void RegisterTypes_osimTools()
     Object::registerType( MeasurementSet() );
     Object::registerType( ModelScaler() );
 
-    Object::registerType( CorrectionController() );
-    Object::registerType( CMC() );
+    //Object::registerType( CorrectionController() );
+    //Object::registerType( CMC() );
     Object::registerType( CMC_Joint() );
     Object::registerType( CMC_Point() );
     Object::registerType( MuscleStateTrackingTask() );
