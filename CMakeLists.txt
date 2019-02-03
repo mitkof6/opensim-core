@@ -19,6 +19,8 @@ message(STATUS "NOTICE: Make sure all OpenSim dependencies are built with the \
 same CMAKE_BUILD_TYPE (Linux) or CONFIGURATION (Xcode/MSVC) as OpenSim to \
 avoid mysterious runtime errors.")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # To create a folder hierarchy within Visual Studio.
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -515,7 +517,7 @@ if(${CMAKE_C_COMPILER} MATCHES "cc" OR ${CMAKE_C_COMPILER} MATCHES "clang")
             endif()
         endif()
     else() # not APPLE
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g")
     endif()
 endif()
 
